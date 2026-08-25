@@ -2,6 +2,7 @@ from chairman_book.members import register_member, get_members
 import chairman_book.payments as payments
 from chairman_book.storage import load_data, save_data
 from chairman_book import logger
+import chairman_book.backup as backup
 
 
 def main():
@@ -12,8 +13,9 @@ def main():
         print("3. Record payment")
         print("4. View payment history")
         print("5. Check payment status")
-        print("6. Exit")
-
+        print("6. Backup data")
+        print("7. Import members")
+        print("8. Exit")
         choice = input("Enter your choice: ")
 
         # Register member
@@ -27,7 +29,7 @@ def main():
             print(f"Name: {member['name']}")
             print(f"Phone: {member['phone']}")
 
-        # View members
+        
         elif choice == "2":
             members = get_members()
 
@@ -42,7 +44,7 @@ def main():
                         f"{member['phone']}"
                     )
 
-        # Record payment
+        
         elif choice == "3":
             member_name = input("Enter member's name: ")
             amount = input("Enter amount paid: ")
@@ -69,7 +71,7 @@ def main():
                 print(f"Amount: ₦{payment['amount']:,.2f}")
                 print(f"Month: {payment['month']}")
 
-        # View payment history
+        
         elif choice == "4":
             member_name = input("Enter member's name: ")
 
@@ -92,7 +94,6 @@ def main():
 
                 print(f"\nTotal paid: ₦{total:,.2f}")
 
-        # Check payment status
         elif choice == "5":
             member_name = input("Enter member's name: ")
             month = input("Enter month to check: ")
@@ -117,14 +118,23 @@ def main():
                 print(f"Month: {month}")
                 print("Status: OWING")
 
-        # Exit
         elif choice == "6":
+            backup_file = backup.create_backup()
+
+            if backup_file is None:
+                print("\nNo data file found. Nothing to backup.")
+            else:
+                print("\nBackup created successfully!")
+                print(f"Backup file: {backup_file}")
+
+        
+        elif choice == "8":
             print("\nThank you for using Chairman Ade's Money Book.")
             print("Goodbye!")
             break
 
         else:
-            print("\nInvalid choice. Please select 1-6.")
+            print("\nInvalid choice. Please select 1-8.")
 
 
 if __name__ == "__main__":

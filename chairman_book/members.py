@@ -33,3 +33,37 @@ def find_member(name):
             return member
 
     return None
+
+
+def import_members(filename):
+    imported = 0
+    skipped = 0
+
+    try:
+        with open(filename, "r", encoding="utf-8") as file:
+            for line in file:
+                line = line.strip()
+
+                if not line:
+                    continue
+
+                parts = line.split(",")
+
+                if len(parts) != 2:
+                    skipped += 1
+                    continue
+
+                name = parts[0].strip()
+                phone = parts[1].strip()
+
+                if not name or not phone:
+                    skipped += 1
+                    continue
+
+                register_member(name, phone)
+                imported += 1
+
+    except FileNotFoundError:
+        return None, 0, 0
+
+    return True, imported, skipped    
