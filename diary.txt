@@ -1,3 +1,5 @@
 [2026-08-25 04:20:55] Diary test successful
 [2026-08-25 04:36:15] Registered member: linda - 0987623451
 [2026-08-25 04:39:57] Payment recorded: rita - ₦5,000.00 - may 2026
+[2026-08-25 05:21:58] Registered member: "John Doe - 08012345678
+[2026-08-25 05:22:51] Payment recorded: john doe - ₦5,000.00 - August 2026
